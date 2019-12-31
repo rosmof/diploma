@@ -20,8 +20,10 @@
 
     <Loggers>
         <Logger name="ro.rosmof" level="TRACE"/>
-        <Logger name="org.apache.catalina" level="DEBUG"/>
-        <Logger name="org.springframework" level="TRACE" additivity="true"/>
+        <Logger name="org.apache.catalina" level="INFO"/>
+        <Logger name="org.springframework" level="INFO" additivity="true"/>
+        <Logger name="org.hibernate" level="ERROR"/>
+        <Logger name="com.zaxxer" level="ERROR"/>
         <Root level="TRACE">
             <AppenderRef ref="Console" level="TRACE"/>                    <!--  INFO pentru consola -->
             <AppenderRef ref="RollingFile" level="TRACE"/>              <!--  TRACE pentru fisier -->

@@ -4,10 +4,12 @@ import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
@@ -21,6 +23,10 @@ import java.util.Properties;
 @Configuration
 @PropertySource("classpath:database.properties")
 @EnableTransactionManagement
+@EnableJpaRepositories(
+        basePackages = "ro.rosmof.model",
+        transactionManagerRef = "transactionManager")
+@ComponentScan(basePackages = "ro.rosmof.model")
 public class ModelConfiguration {
 
     private Environment environment;
@@ -41,7 +47,7 @@ public class ModelConfiguration {
     }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean(Environment environment) {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(Environment environment) {
         HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
         adapter.setDatabase(Database.MYSQL);
         adapter.setGenerateDdl(true);
@@ -57,9 +63,9 @@ public class ModelConfiguration {
 
 
     @Bean
-    @Qualifier("diplomaTx")
+    @Qualifier(value = "diplomaTx")
     public JpaTransactionManager transactionManager(Environment environment) {
-        return new JpaTransactionManager(entityManagerFactoryBean(environment).getObject());
+        return new JpaTransactionManager(entityManagerFactory(environment).getObject());
     }
 
 
