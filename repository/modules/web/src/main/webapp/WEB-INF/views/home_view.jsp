@@ -6,8 +6,8 @@
     <title>Home</title>
 </head>
 <body>
-<h1>Welcome to Spittr</h1>
-<a href="<c:url value="/home" />">Diploma Home Page - Testing only!</a>
+<h1>Welcome to Diploma</h1>
+<a href="<c:url value="/diploma" />">Diploma Home Page - Testing only!</a>
 
 </body>
 </html>

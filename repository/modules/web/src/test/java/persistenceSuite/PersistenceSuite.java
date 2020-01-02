@@ -7,6 +7,6 @@ import persistenceSuite.tests.UserTestClass;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({UserTestClass.class, PasswordCheckClass.class})
-public class PersistenceSuite extends PersistenceBaseSuite {
+public class PersistenceSuite {
 
 }

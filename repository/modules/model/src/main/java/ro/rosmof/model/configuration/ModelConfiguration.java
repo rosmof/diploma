@@ -2,7 +2,6 @@ package ro.rosmof.model.configuration;
 
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -12,9 +11,6 @@ import org.springframework.dao.annotation.PersistenceExceptionTranslationPostPro
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.orm.jpa.vendor.Database;
-import org.springframework.orm.jpa.vendor.HibernateJpaDialect;
-import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
@@ -23,9 +19,7 @@ import java.util.Properties;
 @Configuration
 @PropertySource("classpath:database.properties")
 @EnableTransactionManagement
-@EnableJpaRepositories(
-        basePackages = "ro.rosmof.model",
-        transactionManagerRef = "transactionManager")
+@EnableJpaRepositories(basePackages = "ro.rosmof.model.repositories")
 @ComponentScan(basePackages = "ro.rosmof.model")
 public class ModelConfiguration {
 
@@ -36,6 +30,10 @@ public class ModelConfiguration {
         this.environment = environment;
     }
 
+    /**
+     * <p>The datasource provided by hikari is much faster than the ones provided
+     * in spring.</p>
+     */
     @Bean
     public DataSource hikariDataSource() {
         HikariDataSource ds = new HikariDataSource();
@@ -47,25 +45,19 @@ public class ModelConfiguration {
     }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(Environment environment) {
-        HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
-        adapter.setDatabase(Database.MYSQL);
-        adapter.setGenerateDdl(true);
-
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean bean = new LocalContainerEntityManagerFactoryBean();
         bean.setDataSource(hikariDataSource());
-        bean.setJpaDialect(new HibernateJpaDialect());
-        bean.setJpaVendorAdapter(adapter);
-        bean.setPackagesToScan("ro.rosmof.model");
+        bean.setPersistenceUnitName("localContainerEntity");
         bean.setJpaProperties(additionalProperties(environment));
         return bean;
     }
 
-
     @Bean
-    @Qualifier(value = "diplomaTx")
-    public JpaTransactionManager transactionManager(Environment environment) {
-        return new JpaTransactionManager(entityManagerFactory(environment).getObject());
+    public JpaTransactionManager transactionManager() {
+        JpaTransactionManager tx = new JpaTransactionManager();
+        tx.setEntityManagerFactory(entityManagerFactory().getObject());
+        return tx;
     }
 
 
@@ -76,12 +68,12 @@ public class ModelConfiguration {
 
     private Properties additionalProperties(Environment env) {
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("spring.jpa.hibernate.ddl-auto"));
-        properties.setProperty("hibernate.dialect", env.getProperty("spring.jpa.properties.hibernate.dialect"));
-        properties.setProperty("hibernate.current_session_context_class", env.getProperty("spring.jpa.properties.hibernate.current_session_context_class"));
-        properties.setProperty("hibernate.jdbc.lob.non_contextual_creation", env.getProperty("spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation"));
-        properties.setProperty("hibernate.show_sql", env.getProperty("spring.jpa.show-sql"));
-        properties.setProperty("hibernate.format_sql", env.getProperty("spring.jpa.properties.hibernate.format_sql"));
+        properties.setProperty("hibernate.hbm2ddl.auto", environment.getProperty("spring.jpa.hibernate.ddl-auto"));
+        properties.setProperty("hibernate.dialect", environment.getProperty("spring.jpa.properties.hibernate.dialect"));
+        properties.setProperty("hibernate.current_session_context_class", environment.getProperty("spring.jpa.properties.hibernate.current_session_context_class"));
+        properties.setProperty("hibernate.jdbc.lob.non_contextual_creation", environment.getProperty("spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation"));
+        properties.setProperty("hibernate.show_sql", environment.getProperty("spring.jpa.show-sql"));
+        properties.setProperty("hibernate.format_sql", environment.getProperty("spring.jpa.properties.hibernate.format_sql"));
         return properties;
     }
 }

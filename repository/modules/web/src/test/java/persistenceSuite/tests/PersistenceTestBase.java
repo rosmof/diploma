@@ -40,8 +40,8 @@ public class PersistenceTestBase {
     @Rule
     public final SpringMethodRule SPRING_METHOD_RULE = new SpringMethodRule();
 
-    @ClassRule
-    public static final StopwatchMonitorRule monitoringRule = new StopwatchMonitorRule();
+    @Rule
+    public final StopwatchMonitorRule monitoringRule = new StopwatchMonitorRule();
 
     Logger logger;
 

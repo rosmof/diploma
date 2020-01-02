@@ -23,7 +23,7 @@ public class WebServletConfiguration implements WebMvcConfigurer {
     @Bean
     public ViewResolver webResourceViewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix("/WEB-INF/views");
+        resolver.setPrefix("/WEB-INF/views/");
         resolver.setSuffix(".jsp");
         return resolver;
     }
