@@ -26,7 +26,7 @@
         <jackson.version>2.9.8</jackson.version>
         <apache.validator.version>1.6</apache.validator.version>
         <spring.version>5.2.0.RELEASE</spring.version>
-        <spring.data.version>2.1.8.RELEASE</spring.data.version>
+        <spring.data.version>2.1.9.RELEASE</spring.data.version>
         <hikari.version>3.3.1</hikari.version>
         <oracle.jdbc.version>11.2.0.3</oracle.jdbc.version>
         <hibernate.version>5.4.3.Final</hibernate.version>
