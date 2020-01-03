@@ -4,17 +4,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ro.rosmof.model.annotations.DiplomaTransactionDefault;
 import ro.rosmof.model.entities.User;
 import ro.rosmof.model.repositories.UserRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional(rollbackOn = {Exception.class, ServiceException.class})
+@DiplomaTransactionDefault
 public class UserServiceImpl implements UserService {
 
     private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);

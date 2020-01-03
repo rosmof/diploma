@@ -2,12 +2,8 @@ package ro.rosmof.model.configuration;
 
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
-import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -21,6 +17,7 @@ import java.util.Properties;
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = "ro.rosmof.model.repositories")
 @ComponentScan(basePackages = "ro.rosmof.model")
+@ImportResource("classpath:model-extra-configuration.xml")
 public class ModelConfiguration {
 
     private Environment environment;
@@ -60,11 +57,13 @@ public class ModelConfiguration {
         return tx;
     }
 
-
     @Bean
-    public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
-        return new PersistenceExceptionTranslationPostProcessor();
+    public SimpleTransactionProfile profile() {
+        SimpleTransactionProfile profile = new SimpleTransactionProfile();
+        profile.setOrder(1);
+        return profile;
     }
+
 
     private Properties additionalProperties(Environment env) {
         Properties properties = new Properties();

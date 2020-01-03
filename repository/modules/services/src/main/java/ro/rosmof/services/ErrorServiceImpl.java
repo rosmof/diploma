@@ -2,16 +2,16 @@ package ro.rosmof.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ro.rosmof.model.annotations.DiplomaErrorTransaction;
 import ro.rosmof.model.entities.Error;
 import ro.rosmof.model.repositories.ErrorRepository;
 
-import javax.transaction.Transactional;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Calendar;
 
 @Service
-@Transactional(Transactional.TxType.REQUIRES_NEW)
+@DiplomaErrorTransaction
 public class ErrorServiceImpl implements ErrorService {
 
     @Autowired

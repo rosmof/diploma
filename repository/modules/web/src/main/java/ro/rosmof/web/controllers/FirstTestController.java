@@ -28,7 +28,7 @@ public class FirstTestController {
     @Autowired
     private ErrorService errorService;
 
-    @RequestMapping(value = "/diploma", method = RequestMethod.GET)
+    @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String getHomeRequest(HttpServletRequest request, HttpServletResponse response) {
         logger.info("controller method called");
         try {

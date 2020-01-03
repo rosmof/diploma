@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>Welcome to Diploma</h1>
-<a href="<c:url value="/diploma" />">Diploma Home Page - Testing only!</a>
+<a href="<c:url value="/home" />">Diploma Home Page - Testing only!</a>
 
 </body>
 </html>

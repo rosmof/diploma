@@ -21,7 +21,7 @@
     <Loggers>
         <Logger name="ro.rosmof" level="TRACE"/>
         <Logger name="org.apache.catalina" level="INFO"/>
-        <Logger name="org.springframework" level="TRACE" additivity="true"/>
+        <Logger name="org.springframework" level="ERROR" additivity="true"/>
         <Logger name="org.hibernate" level="ERROR"/>
         <Logger name="com.zaxxer" level="ERROR"/>
         <Logger name="org.springframework.transaction" level="TRACE"/>

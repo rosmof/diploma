@@ -3,7 +3,7 @@
 <!--        xmlns="http://java.sun.com/xml/ns/javaee"-->
 <!--        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
 <!--        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_4_0.xsd"-->
-<!--        version="4.0">-->
+<!--        version="3.0">-->
 <web-app version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
@@ -94,7 +94,7 @@
     <!--    </servlet>-->
 
     <error-page>
-        <location>/badrequest</location>
+        <location>/diploma</location>
     </error-page>
 
     <servlet-mapping>
