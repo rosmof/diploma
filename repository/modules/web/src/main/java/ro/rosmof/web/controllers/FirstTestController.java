@@ -3,10 +3,12 @@ package ro.rosmof.web.controllers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ro.rosmof.model.entities.User;
+import ro.rosmof.services.DatabaseServiceInterface;
 import ro.rosmof.services.ErrorService;
 import ro.rosmof.services.UserService;
 
@@ -28,9 +30,16 @@ public class FirstTestController {
     @Autowired
     private ErrorService errorService;
 
+    @Autowired
+    private DatabaseServiceInterface ds;
+
+    @Autowired
+    private ApplicationContext applicationContext;
+
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String getHomeRequest(HttpServletRequest request, HttpServletResponse response) {
         logger.info("controller method called");
+        ds.process();
         try {
 
             List<User> userList = new ArrayList<>();

@@ -17,7 +17,6 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @EnableWebMvc
 @ComponentScan(value = "ro.rosmof.web")
 public class WebServletConfiguration implements WebMvcConfigurer {
-
     @Bean
     public ViewResolver webResourceViewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();

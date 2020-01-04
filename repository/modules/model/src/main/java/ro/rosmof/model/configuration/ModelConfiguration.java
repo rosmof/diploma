@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import ro.rosmof.Application;
 
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -32,6 +33,7 @@ public class ModelConfiguration {
      * in spring.</p>
      */
     @Bean
+    @Profile(Application.Profiles.DEVELOPER)
     public DataSource hikariDataSource() {
         HikariDataSource ds = new HikariDataSource();
         ds.setJdbcUrl(environment.getProperty("mysql.diploma.url"));

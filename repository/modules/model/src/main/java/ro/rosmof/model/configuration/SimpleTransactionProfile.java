@@ -15,6 +15,18 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import java.util.Optional;
 
+/**
+ * <p>
+ * This is a Spring AOP example; the bean is configured in {@link ModelConfiguration}
+ * and the method {@code profile()} is used as an around advice for the service
+ * pointcut (see {@code model-extra-configuration.xml} for more details).
+ * </p>
+ *
+ * <p>
+ * The result: the {@code profile()} method is executed before each call
+ * to a service in {@code ro.rosmof.services.UserService class}. See how the pointcut is defined.
+ * </p>
+ */
 public class SimpleTransactionProfile implements Ordered {
 
     static final Logger logger = LoggerFactory.getLogger(SimpleTransactionProfile.class);

@@ -5,9 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.transaction.AfterTransaction;
 import org.springframework.test.context.transaction.BeforeTransaction;
+import org.springframework.transaction.annotation.Transactional;
+import ro.rosmof.Application;
 import ro.rosmof.configuration.RootContextConfiguration;
 import ro.rosmof.model.entities.User;
 import ro.rosmof.services.ErrorService;
@@ -21,7 +24,8 @@ import java.sql.Connection;
 import java.util.Random;
 
 @ContextConfiguration(classes = RootContextConfiguration.class)
-//@Transactional
+@Transactional
+@ActiveProfiles(Application.Profiles.DEVELOPER)
 public class UserTestClass extends PersistenceTestBase {
 
     @Autowired
