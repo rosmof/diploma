@@ -29,7 +29,7 @@
         <spring.data.version>2.1.8.RELEASE</spring.data.version>
         <hikari.version>3.3.1</hikari.version>
         <oracle.jdbc.version>11.2.0.3</oracle.jdbc.version>
-        <hibernate.version>5.4.3.Final</hibernate.version>
+        <hibernate.version>5.4.24.Final</hibernate.version>
         <p6spy.version>3.8.2</p6spy.version>
         <javax.valiation.version>2.0.1.Final</javax.valiation.version>
         <hibernate.validator.version>6.0.16.Final</hibernate.validator.version>
