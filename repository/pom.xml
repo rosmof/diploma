@@ -33,7 +33,7 @@
         <p6spy.version>3.8.2</p6spy.version>
         <javax.valiation.version>2.0.1.Final</javax.valiation.version>
         <hibernate.validator.version>6.0.16.Final</hibernate.validator.version>
-        <mysql.connector.version>8.0.18</mysql.connector.version>
+        <mysql.connector.version>8.0.28</mysql.connector.version>
         <glassfish.javax.el.version>3.0.1-b09</glassfish.javax.el.version>
         <javax.el.version>2.2.4</javax.el.version>
         <config.module.version>1.0</config.module.version>
